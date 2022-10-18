@@ -19,7 +19,7 @@ class AssignmentsView(generics.ListCreateAPIView):
         )
 
     def post(self, request, *args, **kwargs):
-        student = Student.objects.get(user=request.user)
+        student = Student.objects.get(user=request.user)    
         request.data['student'] = student.id
 
         serializer = self.serializer_class(data=request.data)

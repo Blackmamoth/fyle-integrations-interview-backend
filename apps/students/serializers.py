@@ -17,9 +17,9 @@ class StudentAssignmentSerializer(serializers.ModelSerializer):
 
         if 'state' in attrs:
             if attrs['state'] == 'GRADED':
-                raise serializers.ValidationError('Student cannot set state to GRADED')
+                raise serializers.ValidationError({'non_field_errors':'Student cannot set state to GRADED'})
             if attrs['state'] == 'SUBMITTED' and not ('teacher' in attrs and attrs['teacher']):
-                raise serializers.ValidationError('Teacher ID has to be sent to set state to SUBMITTED')
+                raise serializers.ValidationError({'non_field_errors': 'Teacher ID has to be sent to set state to SUBMITTED'})
 
         if self.partial:
             return attrs
