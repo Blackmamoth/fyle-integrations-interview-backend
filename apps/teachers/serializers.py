@@ -18,6 +18,12 @@ class TeacherAssignmentSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'non_field_errors': 'Teacher cannot change the content of the assignment'})
         return data
 
+    def validate_grade(self, grade):
+        valid_choices = ['A', 'B', 'C', 'D']
+        if not grade in valid_choices:
+            raise serializers.ValidationError('is not a valid choice.')
+        return grade
+
     def save(self):
         assignment = self.instance
         assignment.state = "GRADED"
