@@ -20,15 +20,13 @@ class TeacherAssignmentSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'non_field_errors': 'GRADED assignments cannot be graded again'})
         if not context.get('teacher_id') == instance.teacher.id:
             raise serializers.ValidationError({'non_field_errors': 'Teacher cannot grade for other teacher\'s assignment'})
+        instance.grade = data.get('grade')
+        instance.state = data.get('state')
         return data
 
     def validate_grade(self, grade):
         valid_choices = ['A', 'B', 'C', 'D']
         if not grade in valid_choices:
             raise serializers.ValidationError('is not a valid choice.')
+        print('2')
         return grade
-
-    def save(self):
-        assignment = self.instance
-        assignment.state = "GRADED"
-        assignment.save()
