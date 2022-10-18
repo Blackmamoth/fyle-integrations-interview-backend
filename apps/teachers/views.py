@@ -16,7 +16,7 @@ class TeacherAssignmentsView(APIView):
     def patch(self, request: Request):
         assignment_id = request.data.get('id')
         assignment = Assignment.objects.get(id=assignment_id)
-        serializer = TeacherAssignmentSerializer(instance=assignment, data=request.data, partial=True, context={'request': request})
+        serializer = TeacherAssignmentSerializer(instance=assignment, data=request.data, partial=True, context={'teacher_id': request.user.id})
         if serializer.is_valid():
             serializer.save()
             return Response(data={'data':serializer.data}, status=status.HTTP_200_OK)

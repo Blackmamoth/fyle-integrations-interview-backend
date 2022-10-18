@@ -150,7 +150,7 @@ def test_grade_other_teacher_teacher_2(api_client, teacher_2):
 
     error = response.json()
 
-    assert error['non_field_errors'] == ['Teacher cannot grade for other teacher''s assignment']
+    assert error['non_field_errors'] == ['Teacher cannot grade for other teacher\'s assignment']
 
 
 @pytest.mark.django_db()
