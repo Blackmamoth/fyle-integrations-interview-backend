@@ -25,7 +25,7 @@ class TeacherAssignmentSerializer(serializers.ModelSerializer):
         return data
 
     def validate_grade(self, grade):
-        valid_choices = ['A', 'B', 'C', 'D']
+        valid_choices = [choice[0] for choice in self.instance.grade.field.choices]
         if not grade in valid_choices:
             raise serializers.ValidationError('is not a valid choice.')
         print('2')
